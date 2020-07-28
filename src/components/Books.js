@@ -1,5 +1,6 @@
 import React from 'react'
 import BooksManage from "./BooksManage";
+import AlertMessageInfo from "./AlertMessageInfo"
 
 class Books extends React.Component {
 
@@ -9,7 +10,12 @@ class Books extends React.Component {
             name: "",
             author: "",
             bookList: [],
-            showResults: false
+            showResults: false,
+            alertMessageInfo: {
+                showMessage: false,
+                type: '',
+                message: ''
+            }
         });
     }
 
@@ -20,17 +26,43 @@ class Books extends React.Component {
         })
     };
 
+    validateNameDuplicity = (name) => {
+        return (this.state.bookList.filter(book => book.name === name).length > 0);
+    };
+
     handleSubmit = (event) => {
         const newBookItem = {
             name: this.state.name,
             author: this.state.author
         };
-        this.setState({
-            name: '',
-            author: '',
-            bookList: [...this.state.bookList, newBookItem],
-            showResults: true
-        });
+
+        let isNameExists = this.validateNameDuplicity(newBookItem.name);
+
+        if (isNameExists) {
+            this.setState({
+                name: '',
+                author: '',
+                bookList: [...this.state.bookList],
+                showResults: true,
+                alertMessageInfo: {
+                    showMessage: true,
+                    type: 'error',
+                    message: "Book with name '" + newBookItem.name + "' already exists"
+                }
+            });
+        } else {
+            this.setState({
+                name: '',
+                author: '',
+                bookList: [...this.state.bookList, newBookItem],
+                showResults: true,
+                alertMessageInfo: {
+                    showMessage: true,
+                    type: 'success',
+                    message: "Book with name '" + newBookItem.name + "' added successfully"
+                }
+            });
+        }
 
         event.preventDefault();
     };
@@ -78,12 +110,19 @@ class Books extends React.Component {
                             </button>
                         </div>
                     </div>
+                </form>
+
+                <br/>
+                <div>
+                    <AlertMessageInfo
+                        alertMessageInfo={this.state.alertMessageInfo}
+                    />
 
                     <BooksManage
                         data={this.state.bookList}
-                        showResults={this.state.showResults}/>
-
-                </form>
+                        showResults={this.state.showResults}
+                    />
+                </div>
             </div>
 
 

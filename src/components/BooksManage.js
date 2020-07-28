@@ -6,11 +6,10 @@ function BooksManage(props) {
         <div className={props.showResults ? '' : 'hidden'}>
 
             <Table striped bordered hover>
-
                 <thead>
                 <tr>
 
-                    <th>#</th>
+                    <th>S.N.</th>
                     <th>Name</th>
                     <th>Author</th>
                     <th>Action</th>
@@ -24,6 +23,10 @@ function BooksManage(props) {
                         <td>{bookInfo.name}</td>
                         <td>{bookInfo.author}</td>
 
+                        <td>
+                            <button> Edit</button>
+                            <button> Delete</button>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
