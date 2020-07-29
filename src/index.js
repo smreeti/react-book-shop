@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './style.css';
-import Books from './components/Books';
+
+import Books from "./components/Books";
 // import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <div>
         <Books/>
-        {/*<BooksManage/>*/}
     </div>,
 
     document.getElementById('root')

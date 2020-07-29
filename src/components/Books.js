@@ -1,21 +1,26 @@
 import React from 'react'
-import BooksManage from "./BooksManage";
+
+import Header from "./Header"
+import BooksAdd from "./BooksAdd"
+import BooksManage from "./BooksManage"
 import AlertMessageInfo from "./AlertMessageInfo"
+import BookDeleteModal from "./BookDeleteModal";
 
 class Books extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = ({
-            name: "",
-            author: "",
+            name: '',
+            author: '',
             bookList: [],
             showResults: false,
             alertMessageInfo: {
                 showMessage: false,
                 type: '',
                 message: ''
-            }
+            },
+            showDeleteModal: false
         });
     }
 
@@ -67,70 +72,53 @@ class Books extends React.Component {
         event.preventDefault();
     };
 
+    openDeleteModal = () => {
+        console.log("modal clicked");
+
+        this.setState({
+                showDeleteModal: true
+            }
+        );
+    };
+
+    handleCloseModal = () => {
+        this.setState({showDeleteModal: false});
+    };
+
     render() {
         return (
+            <div className="book-shop">
+                <Header/>
 
-            <div className="bs-example">
-                <h1> React Book Shop </h1>
-                <form>
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">Name</label>
-                        <div className="col-sm-10">
-                            <input type="text"
-                                   className="form-control"
-                                   name="name"
-                                   value={this.state.name}
-                                   placeholder="Enter name"
-                                   onChange={this.handleChange}
-                                   required/>
-                        </div>
-                    </div>
-                    <br/>
-
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">Author</label>
-                        <div className="col-sm-10">
-                            <input type="text"
-                                   className="form-control"
-                                   name="author"
-                                   value={this.state.author}
-                                   placeholder="Enter author"
-                                   onChange={this.handleChange}
-                                   required/>
-                        </div>
-                    </div>
-
-                    <br/>
-
-                    <div className="form-group row">
-                        <div className="col-sm-10 offset-sm-2">
-                            <button type="submit"
-                                    className="btn btn-primary"
-                                    onClick={this.handleSubmit}>Submit
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                <BooksAdd
+                    data={this.state}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                />
 
                 <br/>
-                <div>
-                    <AlertMessageInfo
-                        alertMessageInfo={this.state.alertMessageInfo}
-                    />
 
-                    <BooksManage
-                        data={this.state.bookList}
-                        showResults={this.state.showResults}
-                    />
-                </div>
+                <AlertMessageInfo
+                    alertMessageInfo={this.state.alertMessageInfo}
+                />
+
+                <BooksManage
+                    data={this.state.bookList}
+                    showResults={this.state.showResults}
+                    openDeleteModal={this.openDeleteModal}
+                />
+
+                <BookDeleteModal showDeleteModal={this.state.showDeleteModal}
+                                 handleCloseModal={this.handleCloseModal}
+                />
+
+
             </div>
-
-
         )
     }
 }
 
-export default Books
+export default Books;
 
 
 

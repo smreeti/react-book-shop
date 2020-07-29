@@ -8,7 +8,6 @@ function BooksManage(props) {
             <Table striped bordered hover>
                 <thead>
                 <tr>
-
                     <th>S.N.</th>
                     <th>Name</th>
                     <th>Author</th>
@@ -25,7 +24,7 @@ function BooksManage(props) {
 
                         <td>
                             <button> Edit</button>
-                            <button> Delete</button>
+                            <button onClick={props.openDeleteModal}> Delete</button>
                         </td>
                     </tr>
                 ))}
