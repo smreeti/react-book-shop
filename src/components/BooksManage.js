@@ -1,37 +1,39 @@
 import React from 'react'
 import {Table} from 'react-bootstrap'
 
-function BooksManage(props) {
+const BooksManage = (props) => {
     return (
-        <div className={props.showResults ? '' : 'hidden'}>
+        <div>
+            {props.data.length > 0 ?
 
-            <Table striped bordered hover>
-                <thead>
-                <tr>
-                    <th>S.N.</th>
-                    <th>Name</th>
-                    <th>Author</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                {props.data.map((bookInfo, index) => (
+                <Table striped bordered hover>
+                    <thead>
                     <tr>
-                        <td>{index + 1}</td>
-                        <td>{bookInfo.name}</td>
-                        <td>{bookInfo.author}</td>
-
-                        <td>
-                            <button> Edit</button>
-                            <button onClick={props.openDeleteModal}> Delete</button>
-                        </td>
+                        <th>S.N.</th>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Action</th>
                     </tr>
-                ))}
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody>
+
+                    {props.data.map((bookInfo, index) => (
+                        <tr>
+                            <td>{index + 1}</td>
+                            <td>{bookInfo.name}</td>
+                            <td>{bookInfo.author}</td>
+
+                            <td>
+                                <button onClick={() => props.openUpdateModal(bookInfo)}> Edit</button>
+                                <button onClick={() => props.openDeleteModal(bookInfo.id)}> Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+                : 'No Records Found'}
         </div>
     )
-}
+};
 
 export default BooksManage

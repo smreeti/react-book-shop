@@ -10,10 +10,17 @@ function BookDeleteModal(props) {
                 contentLabel="Minimal Modal Example"
                 className="Modal"
                 overlayClassName="Overlay"
+                ariaHideApp={false}
                 onRequestClose={props.handleCloseModal}
             >
                 <p> Are you sure you want to delete this Book ?</p>
-                <button onClick={props.handleCloseModal}>Close Modal</button>
+
+                <div>
+                    <button className="error"
+                            onClick={props.deleteBook}> Delete
+                    </button>
+                    <button onClick={props.handleCloseModal}>Close</button>
+                </div>
             </Modal>
             }
         </div>

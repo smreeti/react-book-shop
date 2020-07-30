@@ -5,22 +5,25 @@ import BooksAdd from "./BooksAdd"
 import BooksManage from "./BooksManage"
 import AlertMessageInfo from "./AlertMessageInfo"
 import BookDeleteModal from "./BookDeleteModal";
+import BookUpdateModal from "./BookUpdateModal"
 
 class Books extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = ({
+            id: 0,
             name: '',
             author: '',
             bookList: [],
-            showResults: false,
             alertMessageInfo: {
                 showMessage: false,
                 type: '',
                 message: ''
             },
-            showDeleteModal: false
+            editing: false,
+            showDeleteModal: false,
+            showAlertModal: false
         });
     }
 
@@ -36,19 +39,20 @@ class Books extends React.Component {
     };
 
     handleSubmit = (event) => {
+
         const newBookItem = {
+            id: this.state.id + 1,
             name: this.state.name,
             author: this.state.author
         };
+
+        this.resetAlertMessage();
 
         let isNameExists = this.validateNameDuplicity(newBookItem.name);
 
         if (isNameExists) {
             this.setState({
-                name: '',
-                author: '',
                 bookList: [...this.state.bookList],
-                showResults: true,
                 alertMessageInfo: {
                     showMessage: true,
                     type: 'error',
@@ -57,10 +61,7 @@ class Books extends React.Component {
             });
         } else {
             this.setState({
-                name: '',
-                author: '',
                 bookList: [...this.state.bookList, newBookItem],
-                showResults: true,
                 alertMessageInfo: {
                     showMessage: true,
                     type: 'success',
@@ -69,46 +70,149 @@ class Books extends React.Component {
             });
         }
 
+        this.resetStateParams();
         event.preventDefault();
     };
 
-    openDeleteModal = () => {
-        console.log("modal clicked");
-
+    handleCloseModal = () => {
         this.setState({
-                showDeleteModal: true
+            showDeleteModal: false,
+            showAlertModal: false
+        });
+    };
+
+    openDeleteModal = (id) => {
+        console.log("Delete Modal clicked");
+        this.resetAlertMessage();
+        this.setState({
+                showDeleteModal: true,
+                id: id
             }
         );
     };
 
-    handleCloseModal = () => {
-        this.setState({showDeleteModal: false});
+    openUpdateModal = (bookInfo) => {
+        console.log("Update Modal clicked");
+
+        this.resetAlertMessage();
+        this.setEditing(true);
+
+        this.setState({
+                id: bookInfo.id,
+                name: bookInfo.name,
+                author: bookInfo.author
+            }
+        );
+    };
+
+    deleteBook = () => {
+        const updatedBookList = this.state.bookList.filter(book => {
+                return book.id !== this.state.id
+            }
+        );
+
+        this.setState({
+            bookList: updatedBookList,
+            showDeleteModal: false,
+            alertMessageInfo: {
+                showMessage: true,
+                type: 'success',
+                message: "Selected Book deleted successfully"
+            }
+        });
+    };
+
+    resetAlertMessage = () => {
+        this.setState({
+            alertMessageInfo: {
+                showMessage: false,
+                type: '',
+                message: ''
+            },
+        })
+    };
+
+    resetStateParams = () => {
+        this.setState({
+            id: '',
+            name: '',
+            author: '',
+            showAlertModal: true
+        })
+    };
+
+    updateBook = () => {
+
+        console.log("update clicked");
+
+        const updatedBookList = this.state.bookList.filter(book => {
+            if (book.id === this.state.id) {
+                book.name = this.state.name;
+                book.author = this.state.author
+            }
+
+            return book;
+        });
+
+        this.setState({
+            bookList: updatedBookList,
+            alertMessageInfo: {
+                showMessage: true,
+                type: 'success',
+                message: "Selected Book updated successfully"
+            }
+        });
+
+        this.resetStateParams();
+    };
+
+    setEditing = (value) => {
+        this.setState({
+            editing: value
+        })
     };
 
     render() {
+
         return (
             <div className="book-shop">
                 <Header/>
 
-                <BooksAdd
-                    data={this.state}
-                    handleChange={this.handleChange}
-                    handleSubmit={this.handleSubmit}
-                />
+                {
+                    this.state.editing === false ? (
+                            <BooksAdd
+                                data={this.state}
+                                handleChange={this.handleChange}
+                                handleSubmit={this.handleSubmit}
+                            />
+                        )
+                        : (
+
+                            < BookUpdateModal
+                                data={this.state}
+                                handleChange={this.handleChange}
+                                updateBook={this.updateBook}
+                                setEditing={this.setEditing}
+                            />
+                        )
+                }
 
                 <br/>
 
                 <AlertMessageInfo
                     alertMessageInfo={this.state.alertMessageInfo}
+                    showAlertModal={this.state.showAlertModal}
+                    handleCloseModal={this.handleCloseModal}
                 />
 
                 <BooksManage
                     data={this.state.bookList}
-                    showResults={this.state.showResults}
                     openDeleteModal={this.openDeleteModal}
+                    openUpdateModal={this.openUpdateModal}
                 />
 
                 <BookDeleteModal showDeleteModal={this.state.showDeleteModal}
+                                 deleteBook={this.deleteBook}
                                  handleCloseModal={this.handleCloseModal}
                 />
 
