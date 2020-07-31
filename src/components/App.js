@@ -58,7 +58,7 @@ class App extends React.Component {
                     deleteBook={this.deleteBook}
                 />;
             case  1:
-                return <AssignBooksNav/>
+                return <AssignBooksNav/>;
             default:
         }
     };
@@ -222,9 +222,7 @@ class App extends React.Component {
                 <Header/>
 
                 <div className="App">
-                    <Nav
-                        activeTab={this.state.activeTab}
-                        handleTabChange={this.handleTabChange}
+                    <Nav handleTabChange={this.handleTabChange}
                     />
                     <main className="App-content">
                         {this.renderContent()}
