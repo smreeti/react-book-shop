@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookUpdateModal = (props) => {
+const BookUpdate = (props) => {
 
     const {bookUpdateObj, handleChange, updateBook, setEditing} = props;
 
@@ -50,4 +50,4 @@ const BookUpdateModal = (props) => {
     )
 };
 
-export default BookUpdateModal
+export default BookUpdate
