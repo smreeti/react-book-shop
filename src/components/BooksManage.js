@@ -18,7 +18,7 @@ const BooksManage = (props) => {
                     <tbody>
 
                     {props.data.map((bookInfo, index) => (
-                        <tr>
+                        <tr key={bookInfo.id}>
                             <td>{index + 1}</td>
                             <td>{bookInfo.name}</td>
                             <td>{bookInfo.author}</td>

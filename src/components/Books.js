@@ -41,7 +41,7 @@ class Books extends React.Component {
     handleSubmit = (event) => {
 
         const newBookItem = {
-            id: this.state.id + 1,
+            id: this.state.bookList.length + 1,
             name: this.state.name,
             author: this.state.author
         };
@@ -194,7 +194,8 @@ class Books extends React.Component {
                                 bookAddObj={bookAddObj}
                                 handleChange={this.handleChange}
                                 handleSubmit={this.handleSubmit}
-                            />
+                            >
+                            </BooksAdd>
                         )
                         : (
                             < BookUpdateModal
