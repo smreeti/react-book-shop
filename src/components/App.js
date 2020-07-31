@@ -1,17 +1,16 @@
 import React from 'react'
 
 import Header from "./Header"
-import BooksAdd from "./BooksAdd"
-import BooksManage from "./BooksManage"
-import AlertMessageInfo from "./AlertMessageInfo"
-import BookDeleteModal from "./BookDeleteModal";
-import BookUpdateModal from "./BookUpdateModal"
+import AddBooksNav from "./AddBooksNav"
+import Nav from "./Nav";
+import AssignBooksNav from "./AssignBooksNav";
 
-class Books extends React.Component {
+class App extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = ({
+            activeTab: 0,
             id: 0,
             name: '',
             author: '',
@@ -26,6 +25,51 @@ class Books extends React.Component {
             showAlertModal: false
         });
     }
+
+    renderContent = () => {
+
+        const bookAddObj = {
+            name: this.state.name,
+            author: this.state.author
+        };
+
+        const bookUpdateObj = {
+            name: this.state.name,
+            author: this.state.author
+        };
+
+        switch (this.state.activeTab) {
+            case 0 :
+                return <AddBooksNav
+                    editing={this.state.editing}
+                    bookAddObj={bookAddObj}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    bookUpdateObj={bookUpdateObj}
+                    updateBook={this.updateBook}
+                    setEditing={this.setEditing}
+                    alertMessageInfo={this.state.alertMessageInfo}
+                    showAlertModal={this.state.showAlertModal}
+                    handleCloseModal={this.handleCloseModal}
+                    bookList={this.state.bookList}
+                    openDeleteModal={this.openDeleteModal}
+                    openUpdateModal={this.openUpdateModal}
+                    showDeleteModal={this.state.showDeleteModal}
+                    deleteBook={this.deleteBook}
+                />;
+            case  1:
+                return <AssignBooksNav/>
+            default:
+        }
+    };
+
+    handleTabChange = (index) => {
+        console.log("clicked" + index);
+
+        this.setState({
+            activeTab: index
+        })
+    };
 
     handleChange = (event) => {
         const {name, value} = event.target;
@@ -173,66 +217,26 @@ class Books extends React.Component {
     };
 
     render() {
-
-        const bookAddObj = {
-            name: this.state.name,
-            author: this.state.author
-        };
-
-        const bookUpdateObj = {
-            name: this.state.name,
-            author: this.state.author
-        };
-
         return (
             <div className="book-shop">
                 <Header/>
 
-                {
-                    this.state.editing === false ? (
-                            <BooksAdd
-                                bookAddObj={bookAddObj}
-                                handleChange={this.handleChange}
-                                handleSubmit={this.handleSubmit}
-                            >
-                            </BooksAdd>
-                        )
-                        : (
-                            < BookUpdateModal
-                                bookUpdateObj={bookUpdateObj}
-                                handleChange={this.handleChange}
-                                updateBook={this.updateBook}
-                                setEditing={this.setEditing}
-                            />
-                        )
-                }
-
-                <br/>
-
-                <AlertMessageInfo
-                    alertMessageInfo={this.state.alertMessageInfo}
-                    showAlertModal={this.state.showAlertModal}
-                    handleCloseModal={this.handleCloseModal}
-                />
-
-                <BooksManage
-                    data={this.state.bookList}
-                    openDeleteModal={this.openDeleteModal}
-                    openUpdateModal={this.openUpdateModal}
-                />
-
-                <BookDeleteModal showDeleteModal={this.state.showDeleteModal}
-                                 deleteBook={this.deleteBook}
-                                 handleCloseModal={this.handleCloseModal}
-                />
-
+                <div className="App">
+                    <Nav
+                        activeTab={this.state.activeTab}
+                        handleTabChange={this.handleTabChange}
+                    />
+                    <main className="App-content">
+                        {this.renderContent()}
+                    </main>
+                </div>
 
             </div>
         )
     }
 }
 
-export default Books;
+export default App;
 
 
 

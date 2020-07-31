@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './style.css';
 
-import Books from "./components/Books";
+import App from "./components/App";
 // import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <div>
-        <Books/>
+        <App/>
     </div>,
 
     document.getElementById('root')
