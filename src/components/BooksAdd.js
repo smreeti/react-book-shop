@@ -1,7 +1,7 @@
 import React from "react";
 
-function BooksAdd(props) {
-    const data = props.data;
+const BooksAdd = (props) => {
+    const {bookAddObj, handleChange, handleSubmit} = props;
 
     return (
         <form>
@@ -11,9 +11,9 @@ function BooksAdd(props) {
                     <input type="text"
                            className="form-control"
                            name="name"
-                           value={data.name}
+                           value={bookAddObj.name}
                            placeholder="Enter name"
-                           onChange={props.handleChange}
+                           onChange={handleChange}
                            required/>
                 </div>
             </div>
@@ -25,9 +25,9 @@ function BooksAdd(props) {
                     <input type="text"
                            className="form-control"
                            name="author"
-                           value={data.author}
+                           value={bookAddObj.author}
                            placeholder="Enter author"
-                           onChange={props.handleChange}
+                           onChange={handleChange}
                            required/>
                 </div>
             </div>
@@ -38,12 +38,12 @@ function BooksAdd(props) {
                 <div className="col-sm-10 offset-sm-2">
                     <button type="submit"
                             className="btn btn-primary"
-                            onClick={props.handleSubmit}>Submit
+                            onClick={handleSubmit}>Submit
                     </button>
                 </div>
             </div>
         </form>
     )
-}
+};
 
 export default BooksAdd

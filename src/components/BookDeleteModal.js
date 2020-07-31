@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 
-function BookDeleteModal(props) {
+const BookDeleteModal = (props) => {
     return (
         <div>
             {props.showDeleteModal &&
@@ -25,6 +25,6 @@ function BookDeleteModal(props) {
             }
         </div>
     )
-}
+};
 
 export default BookDeleteModal

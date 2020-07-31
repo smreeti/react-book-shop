@@ -174,6 +174,16 @@ class Books extends React.Component {
 
     render() {
 
+        const bookAddObj = {
+            name: this.state.name,
+            author: this.state.author
+        };
+
+        const bookUpdateObj = {
+            name: this.state.name,
+            author: this.state.author
+        };
+
         return (
             <div className="book-shop">
                 <Header/>
@@ -181,15 +191,14 @@ class Books extends React.Component {
                 {
                     this.state.editing === false ? (
                             <BooksAdd
-                                data={this.state}
+                                bookAddObj={bookAddObj}
                                 handleChange={this.handleChange}
                                 handleSubmit={this.handleSubmit}
                             />
                         )
                         : (
-
                             < BookUpdateModal
-                                data={this.state}
+                                bookUpdateObj={bookUpdateObj}
                                 handleChange={this.handleChange}
                                 updateBook={this.updateBook}
                                 setEditing={this.setEditing}

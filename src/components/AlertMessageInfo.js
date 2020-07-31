@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from "react-modal";
 
-function AlertMessageInfo(props) {
+const AlertMessageInfo = (props) => {
     return (
         <div>
             {props.alertMessageInfo.showMessage &&
@@ -23,6 +23,6 @@ function AlertMessageInfo(props) {
             }
         </div>
     )
-}
+};
 
 export default AlertMessageInfo;

@@ -1,8 +1,8 @@
 import React from "react";
 
-function BookUpdateModal(props) {
+const BookUpdateModal = (props) => {
 
-    const data = props.data;
+    const {bookUpdateObj, handleChange, updateBook, setEditing} = props;
 
     return (
         <div>
@@ -14,8 +14,8 @@ function BookUpdateModal(props) {
                                className="form-control"
                                name="name"
                                placeholder="Enter name"
-                               value={data.name}
-                               onChange={props.handleChange}
+                               value={bookUpdateObj.name}
+                               onChange={handleChange}
                                required/>
                     </div>
                 </div>
@@ -28,8 +28,8 @@ function BookUpdateModal(props) {
                                className="form-control"
                                name="author"
                                placeholder="Enter author"
-                               value={data.author}
-                               onChange={props.handleChange}
+                               value={bookUpdateObj.author}
+                               onChange={handleChange}
                                required/>
                     </div>
                 </div>
@@ -38,16 +38,16 @@ function BookUpdateModal(props) {
             <br/>
             <div>
                 <button className="btn btn-success mt-2"
-                        onClick={props.updateBook}> Update
+                        onClick={updateBook}> Update
                 </button>
 
                 <button className="btn btn-info mt-2"
-                        onClick={() => props.setEditing(false)}> Cancel
+                        onClick={() => setEditing(false)}> Cancel
                 </button>
 
             </div>
         </div>
     )
-}
+};
 
 export default BookUpdateModal
