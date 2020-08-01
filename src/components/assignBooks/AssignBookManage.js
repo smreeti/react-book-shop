@@ -1,0 +1,35 @@
+import React from "react";
+import {Table} from "react-bootstrap";
+
+const AssignBookManage =(props)=>{
+
+    return(
+        <div>
+            {props.assignedBookList.length > 0 ?
+
+                <Table striped bordered hover>
+                    <thead>
+                    <tr>
+                        <th>S.N.</th>
+                        <th>Category</th>
+                        <th>Book Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {props.assignedBookList.map((bookInfo, index) => (
+                        <tr key={bookInfo.bookCategoryId}>
+                            <td>{index + 1}</td>
+                            <td>{bookInfo.bookCategoryName}</td>
+                            <td>{bookInfo.name}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+                : 'No Assigned Book(s) Found'}
+        </div>
+    )
+};
+
+
+export default AssignBookManage;
