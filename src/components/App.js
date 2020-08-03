@@ -2,8 +2,8 @@ import React from 'react'
 
 import Header from "./Header"
 import AddBooksNav from "./nav/AddBooksNav"
-import Nav from "./Nav";
 import AssignBooksNav from "./nav/AssignBooksNav";
+import {BrowserRouter as Router, NavLink, Route, Switch} from "react-router-dom";
 
 class App extends React.Component {
 
@@ -32,18 +32,47 @@ class App extends React.Component {
         })
     };
 
+
     render() {
+
+
         return (
             <div className="book-shop">
                 <Header/>
 
-                <div className="App">
-                    <Nav handleTabChange={this.handleTabChange}
-                    />
-                    <main className="App-content">
-                        {this.renderContent()}
-                    </main>
-                </div>
+                {/*<div className="App">*/}
+                {/*    <Nav handleTabChange={this.handleTabChange}*/}
+                {/*    />*/}
+                {/*    <main className="App-content">*/}
+                {/*        {this.renderContent()}*/}
+                {/*    </main>*/}
+                {/*</div>*/}
+
+
+                <Router>
+                    <div className="App">
+                        <main className="App-content">
+                            <div>
+                                <NavLink to="/add" exact activeStyle={
+                                    {color: 'red'}
+                                }>Add Books </NavLink>
+
+                                <NavLink to="/assign" exact activeStyle={
+                                    {color: 'green'}
+                                }>Assign Books </NavLink>
+                            </div>
+                        </main>
+
+                    </div>
+
+                    <Switch>
+                        <Route path="/add" component={AddBooksNav}/>
+                        <Route path="/assign" component={AssignBooksNav}/>
+
+                        <Route component={AddBooksNav}/>
+                    </Switch>
+
+                </Router>
             </div>
         )
     }
