@@ -1,7 +1,7 @@
 import React from "react";
 
 const SelectComponent = (selectProps) => {
-    const {name, handleChange, options} = selectProps;
+    const {name, placeholder, handleChange, options} = selectProps;
 
     return (
         <select
@@ -9,6 +9,7 @@ const SelectComponent = (selectProps) => {
             onChange={handleChange}
             placeholder="Select"
         >
+            <option value="">{placeholder}</option>
             {
                 options.map(option => {
                     return (

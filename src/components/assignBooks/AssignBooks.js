@@ -26,7 +26,7 @@ const AssignBooks = (props) => {
                 <div className="col-sm-10">
 
                     <SelectComponent
-                        placeholder="Select bookCategory"
+                        placeholder="Select book category"
                         name="bookCategoryId"
                         handleChange={handleChange}
                         options={bookCategoryList}

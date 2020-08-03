@@ -51,7 +51,7 @@ class AssignBooksNav extends React.Component {
 
     render() {
         return (
-            <div>
+           <React.Fragment>
                 <AssignBooks
                     name={this.state.name}
                     bookCategoryList={this.state.bookCategoryList}
@@ -62,7 +62,7 @@ class AssignBooksNav extends React.Component {
                 <AssignBookManage
                     assignedBookList={this.state.assignedBookList}
                 />
-            </div>
+           </React.Fragment>
         )
     }
 }
