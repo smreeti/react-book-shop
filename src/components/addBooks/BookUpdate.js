@@ -33,6 +33,21 @@ const BookUpdate = (props) => {
                                required/>
                     </div>
                 </div>
+
+                <br/>
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">Published Date</label>
+                    <div className="col-sm-10">
+                        <input type="date"
+                               className="form-control"
+                               name="publishedDate"
+                               value={bookUpdateObj.publishedDate}
+                               placeholder="Enter published date"
+                               onChange={handleChange}
+                               required/>
+                    </div>
+                </div>
+
             </form>
 
             <br/>

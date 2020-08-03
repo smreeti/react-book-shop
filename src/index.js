@@ -2,15 +2,45 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './style.css';
-
-import App from "./components/App";
+import AddBooksNav from "./components/nav/AddBooksNav";
+import AssignBooksNav from "./components/nav/AssignBooksNav";
+import {BrowserRouter as Router, NavLink, Route, Switch} from "react-router-dom";
 // import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-    <div>
-        <App/>
-    </div>,
+const routing = (
 
+    <div className="book-shop">
+        <Router>
+            <div className="App">
+                <div className="App-content">
+                    <div>
+                        <NavLink to="/" activeStyle={
+                            {color: 'red'}
+                        }>Add Books </NavLink>
+
+                        <NavLink to="/assign" activeStyle={
+                            {color: 'green'}
+                        }>Assign Books </NavLink>
+                    </div>
+                </div>
+
+            </div>
+
+            <Switch>
+                <Route path="/" exact component={AddBooksNav}/>
+
+                <Route path="/assign" component={AssignBooksNav}/>
+
+                <Route component={AddBooksNav}/>
+            </Switch>
+
+        </Router>
+    </div>
+);
+
+
+ReactDOM.render(
+    routing,
     document.getElementById('root')
 );
 

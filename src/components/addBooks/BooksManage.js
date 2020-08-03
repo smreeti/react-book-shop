@@ -12,6 +12,7 @@ const BooksManage = (props) => {
                         <th>S.N.</th>
                         <th>Name</th>
                         <th>Author</th>
+                        <th>Published Date</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -22,6 +23,7 @@ const BooksManage = (props) => {
                             <td>{index + 1}</td>
                             <td>{bookInfo.name}</td>
                             <td>{bookInfo.author}</td>
+                            <td>{bookInfo.publishedDate}</td>
 
                             <td>
                                 <button onClick={() => props.openUpdateModal(bookInfo)}> Edit</button>

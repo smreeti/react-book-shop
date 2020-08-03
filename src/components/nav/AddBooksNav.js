@@ -13,6 +13,7 @@ class AddBooksNav extends React.Component {
             id: 0,
             name: '',
             author: '',
+            publishedDate: '',
             bookList: [],
             alertMessageInfo: {
                 showMessage: false,
@@ -41,7 +42,8 @@ class AddBooksNav extends React.Component {
         const newBookItem = {
             id: this.state.bookList.length + 1,
             name: this.state.name,
-            author: this.state.author
+            author: this.state.author,
+            publishedDate: this.state.publishedDate
         };
 
         this.resetAlertMessage();
@@ -98,7 +100,8 @@ class AddBooksNav extends React.Component {
         this.setState({
                 id: bookInfo.id,
                 name: bookInfo.name,
-                author: bookInfo.author
+                author: bookInfo.author,
+                publishedDate: bookInfo.publishedDate
             }
         );
     };
@@ -135,6 +138,7 @@ class AddBooksNav extends React.Component {
             id: '',
             name: '',
             author: '',
+            publishedDate: '',
             showAlertModal: true
         })
     };
@@ -146,7 +150,8 @@ class AddBooksNav extends React.Component {
         const updatedBookList = this.state.bookList.filter(book => {
             if (book.id === this.state.id) {
                 book.name = this.state.name;
-                book.author = this.state.author
+                book.author = this.state.author;
+                book.publishedDate = this.state.publishedDate;
             }
 
             return book;
@@ -174,12 +179,14 @@ class AddBooksNav extends React.Component {
 
         const bookAddObj = {
             name: this.state.name,
-            author: this.state.author
+            author: this.state.author,
+            publishedDate: this.state.publishedDate
         };
 
         const bookUpdateObj = {
             name: this.state.name,
-            author: this.state.author
+            author: this.state.author,
+            publishedDate: this.state.publishedDate
         };
 
         return (
