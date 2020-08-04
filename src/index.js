@@ -4,6 +4,7 @@ import './index.css';
 import './style.css';
 import AddBooksNav from "./components/nav/AddBooksNav";
 import AssignBooksNav from "./components/nav/AssignBooksNav";
+import UsersNav from "./components/UsersNav"
 import {BrowserRouter as Router, NavLink, Route, Switch} from "react-router-dom";
 // import * as serviceWorker from './serviceWorker';
 
@@ -14,13 +15,17 @@ const routing = (
             <div className="App">
                 <div className="App-content">
                     <div>
-                        <NavLink to="/" activeStyle={
-                            {color: 'red'}
+                        <NavLink to="/" exact activeStyle={
+                            {color: 'green'}
                         }>Add Books </NavLink>
 
                         <NavLink to="/assign" activeStyle={
                             {color: 'green'}
                         }>Assign Books </NavLink>
+
+                        <NavLink to="/users" activeStyle={
+                            {color: 'green'}
+                        }>Available Users </NavLink>
                     </div>
                 </div>
 
@@ -31,7 +36,9 @@ const routing = (
 
                 <Route path="/assign" component={AssignBooksNav}/>
 
-                <Route component={AddBooksNav}/>
+                <Route path="/users" component={UsersNav}/>
+
+                {/*<Route component={AddBooksNav}/>*/}
             </Switch>
 
         </Router>
