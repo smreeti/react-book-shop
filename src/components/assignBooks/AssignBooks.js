@@ -23,6 +23,7 @@ const AssignBooks = (props) => {
             <br/>
 
             <label className="col-sm-2 col-form-label"> Book Category
+
                 <div className="col-sm-10">
 
                     <SelectComponent

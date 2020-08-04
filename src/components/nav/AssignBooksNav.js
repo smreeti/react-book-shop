@@ -11,7 +11,9 @@ class AssignBooksNav extends React.Component {
             name: '',
             bookCategoryId: '',
             bookCategoryList: bookCategoryData,
-            assignedBookList: []
+            assignedBookList: [],
+            filteredBookList: [],
+            isSearch: false
         });
     }
 
@@ -25,7 +27,6 @@ class AssignBooksNav extends React.Component {
 
     assignBook = (event) => {
         console.log("Assign Book Button Clicked");
-        event.preventDefault();
 
         let bookCategoryName = "";
 
@@ -39,19 +40,55 @@ class AssignBooksNav extends React.Component {
         });
 
         const newBookObj = {
+            id: this.state.assignedBookList.length + 1,
             bookCategoryId: this.state.bookCategoryId,
             name: this.state.name,
             bookCategoryName: bookCategoryName
         };
 
         this.setState({
-            assignedBookList: [...this.state.assignedBookList, newBookObj]
-        })
+            assignedBookList: [...this.state.assignedBookList, newBookObj],
+            bookCategoryId: '',
+            name: '',
+            bookCategoryName: ''
+        });
+
+        event.preventDefault();
+    };
+
+    filterAssignedBooks = (event) => {
+
+        const {value} = event.target;
+
+        let filteredList = [];
+        this.state.assignedBookList.filter(
+            assigned => {
+                if (assigned.bookCategoryId === (value)) {
+                    filteredList = [...filteredList, assigned];
+                }
+                return filteredList;
+            }
+        );
+
+        this.setState({
+            filteredBookList: filteredList,
+            isSearch: value === '' ? false : true
+        });
     };
 
     render() {
+
+        const assignBookManageObj = {
+            assignedBookList: this.state.assignedBookList,
+            handleChange: this.handleChange,
+            bookCategoryList: this.state.bookCategoryList,
+            filteredBookList: this.state.filteredBookList,
+            isSearch: this.state.isSearch,
+            filterAssignedBooks: this.filterAssignedBooks
+        };
+
         return (
-           <React.Fragment>
+            <React.Fragment>
                 <AssignBooks
                     name={this.state.name}
                     bookCategoryList={this.state.bookCategoryList}
@@ -60,9 +97,9 @@ class AssignBooksNav extends React.Component {
                 />
 
                 <AssignBookManage
-                    assignedBookList={this.state.assignedBookList}
+                    assignBookManageObj={assignBookManageObj}
                 />
-           </React.Fragment>
+            </React.Fragment>
         )
     }
 }
