@@ -4,7 +4,7 @@ import SelectComponent from "../SelectComponent";
 
 const AssignBookManage = (props) => {
 
-    const {assignedBookList, bookCategoryList, filteredBookList, isSearch, filterAssignedBooks} = props.assignBookManageObj;
+    const {assignedBookList, bookCategoryList, filteredBookList, isSearch, filterAssignedBooks} = props;
 
     return (
         <div>

@@ -5,8 +5,8 @@ import AssignBookManage from "../assignBooks/AssignBookManage";
 
 class AssignBooksNav extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = ({
             name: '',
             bookCategoryId: '',
@@ -96,8 +96,7 @@ class AssignBooksNav extends React.Component {
                     assignBook={this.assignBook}
                 />
 
-                <AssignBookManage
-                    assignBookManageObj={assignBookManageObj}
+                <AssignBookManage {...assignBookManageObj}
                 />
             </React.Fragment>
         )

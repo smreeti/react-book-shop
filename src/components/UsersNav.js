@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+import API from '../api'
 
 class UsersNav extends React.Component {
     state = {
@@ -9,7 +9,7 @@ class UsersNav extends React.Component {
 
     componentDidMount() {
         try{
-            axios.get('https://jsonplaceholder.typicode.com/users')
+            API.get('/users')
                 .then(response => {
                     this.setState({
                             users: response.data
@@ -33,7 +33,7 @@ class UsersNav extends React.Component {
             name: this.state.name
         };
 
-        axios.post('https://jsonplaceholder.typicode.com/users/', {newUserObj})
+        API.post('/users/', {newUserObj})
             .then(response => {
                 console.log(response.data);
                 this.setState({
