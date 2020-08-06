@@ -4,7 +4,7 @@ import './index.css';
 import './style.css';
 import AddBooksNav from "./components/nav/AddBooksNav";
 import AssignBooksNav from "./components/nav/AssignBooksNav";
-import UsersNav from "./components/UsersNav"
+import UsersNav from "./components/nav/UsersNav"
 import {BrowserRouter as Router, NavLink, Route, Switch} from "react-router-dom";
 // import * as serviceWorker from './serviceWorker';
 
