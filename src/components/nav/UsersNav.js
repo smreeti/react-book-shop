@@ -10,17 +10,21 @@ class UsersNav extends React.Component {
         users: []
     };
 
-    componentDidMount() {
-        API.get('/users')
-            .then(response => {
-                this.setState({
+    async componentDidMount() {
+
+        try {
+            const userResponse = await API.get('/users');
+
+            this.setState({
                     /*Here response is the data we need, since response interceptor already retrieved it
                     * so we no longer need to use response.data anymore.*/
+                    users: userResponse
+                }
+            )
+        } catch (e) {
+            console.log("Error:" + e);
+        }
 
-                        users: response
-                    }
-                )
-            })
     }
 
     handleChange = (event) => {
